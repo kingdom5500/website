@@ -1,0 +1,130 @@
+{% extends "title.html" %}
+
+{% block title %}Kingsley McDonald{% endblock %}
+{% block subtitle %}Python programming enthusiast since day 5082.{% endblock %}
+
+{% block navbar %}
+  <div class="hero-head">
+    <nav class="navbar" style="position: absolute; left: 50%; margin-left: -130px; display: flex; align-items: center">
+      <div class="container">
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <a href="#about" class="navbar-item has-text-light">About Me</a>
+            <a href="#projects" class="navbar-item has-text-light">Projects</a>
+            <a href="#contact" class="navbar-item has-text-light">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <h1 id="about">About Me</h1>
+  <p>
+    Hey there! My name is Kingsley and I spend a lot of my time developing software using Python.
+    I started in August of 2016 and I like to think that I've learned a lot since then. I have
+    always been interested in computers, but I didn't really think much of it until I created my
+    first program. It was some very simple code of course, but I knew I could take it much further
+    - and I have! In the past I really didn't like interacting with other people, but now I've
+    learned to work alongside them even if I know nothing about them. I also enjoy learning new
+    things about computers, especially when it's about software or how things actually work. 
+  </p>
+  <hr>
+  <h1 id="projects">My Projects</h1>
+  <p>
+    A little while ago I started working on a few Python projects. They were larger than the
+    other programs that I was used to creating for so long, but I definitely feel like I've
+    taken a step in the right direction. Most of these projects can be found on my
+    <a href="https://github.com/kingdom5500">GitHub profile</a>.
+    I initially created my GitHub account in order to participate in a weekend-long code
+    jam - it was actually really fun - and since then I've used it to collaborate with other
+    programmers to work on some pretty cool projects! I've put a couple of them here for now.
+  </p>
+  <div class="columns">
+    <div class="column">
+      <div class="box">
+        <strong><a href="https://github.com/kingdom5500/MazeSolver">Maze Solver</a></strong>
+        <p>
+          This program does exactly what you think - it solves mazes. It uses a depth-first
+          search (DFS) algorithm alongside dynamic dead-end filling in order to efficiently
+          find it's way to the end of the maze. The only improvement I would make is allow
+          it to use images which aren't specially formatted. I imagine this would require the
+          use of machine learning to achieve consistent results, but at the moment I'm not
+          quite at that level. Maybe I could be in the future!
+        </p>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box">
+        <strong><a href="https://github.com/kingdom5500/8008simulator">Intel 8008 Simulator</a></strong>
+        <br>
+        <p>
+          This one is one of my favourites. I've been working with fellow programmer
+          <a href="https://github.com/JoeBanks13">Joseph Banks</a> to create a program which
+          simulates Intel's 8008 microprocessor. So far we've created the registers, the
+          memory and a lot of the internal bitwise arithmetic operators, but it's very much
+          still a work in progress. We plan to have it execute the same assembly code that
+          an actual 8008 processor would, and hopefully we will reach that as our end goal.
+        </p>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="box">
+    <strong><a href="#">This Website</a></strong>
+    <br>
+    <p>
+      I've mostly enjoyed developing the back-end of this website, because it's written in
+      Python with the Flask framework. It's all neatly wrapped into one application which is
+      deployed in a simple Docker container. My newest addition to the website is a
+      <a href="https://msg.codingbykingsley.co.uk">message corner</a> (but it consists of more
+      nonsense than actual messages*). It uses an SQLite database to store each message, and
+      POST requests are rate-limited so that <em>some</em> attacks can be prevented, though I
+      am considering a more defensive approach such as a CAPTCHA to give it a very reliable 
+      anti-botting system. Some fellow developers decided to test my input sanitisation by
+      attempting to inject various
+      <a href="https://msg.codingbykingsley.co.uk/message-6">HTML</a>, 
+      <a href="https://msg.codingbykingsley.co.uk/message-43">SQL</a> and
+      <a href="https://msg.codingbykingsley.co.uk/message-4">JS</a> into the application, none
+      of which caused any harm. I don't particularly mind people doing that, as I decided to do
+      this project mostly to learn how to reliably handle forms and databases with Flask anyways.
+      If someone finds a weak spot, it would just be another thing to learn and apply for me.
+      You can find all the code for <a href="https://github.com/kingdom5500/website">my website on GitHub</a>
+      <br>
+      *I created an administrator panel so I can easily manage messages if they get out of hand,
+      of course. I'm always prepared!
+    </p>
+  </div>
+  <p>
+    I'm also thinking about working on many other projects in the near future. Although I have already made
+    <a href="https://github.com/discord-python/bot/commit/1af13364d954363ec7a4d6acc2247797de535f8a">one contribution</a>
+    to a larger community-run project, I do plan on doing a lot more for a variety of different repositories, because I
+    feel like it would be a great learning experience to work alongside a group of others who have similar interests.
+  </p>
+{% endblock %}
+
+{% block footercontent %}
+  <div class="columns">
+    <div class="column">
+      <p class="heading">GitHub</p>
+      <h4>
+        <a href="https://github.com/kingdom5500">kingdom5500</a>
+      </h4>
+    </div>
+    <div class="column">
+      <p class="heading">Email</p>
+      <h4>
+        <a href="mailto:contact@codingbykingsley.co.uk">contact@codingbykingsley.co.uk</a>
+      </h4>
+    </div>
+    <div class="column">
+      <p class="heading">Discord</p>
+      <h4>
+        <a href="https://discordapp.com/users/{{ user['id'] }}">
+          {{ user['username'] }}<span style="font-size: 75%">#{{ user['discriminator'] }}</span>
+        </a>
+      </h4>
+    </div>
+  </div>
+{% endblock %}

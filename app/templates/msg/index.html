@@ -1,0 +1,37 @@
+{% extends "msg/title.html" %}
+
+{% block input %}
+
+    <h1>Create</h1>
+    <form action="" role="form" method="POST" name="add_task">
+        {{ form.csrf_token }}
+        <div class="field">
+            <label class="field">Name</label>
+            <div class="control">
+                {% if form.name.errors %}
+                    {{ form.name(class="input is-danger", placeholder="Anonymous") }}
+                    <p class="help is-danger">Names must be below 32 characters</p>
+                {% else %}
+                    {{ form.name(class="input", placeholder="Anonymous") }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="field">
+            <label class="field">Message</label>
+            <div class="control">
+                {% if form.message.errors %}
+                    {{form.message(class="textarea is-danger", placeholder="I did say to enter your message, you know...")}}
+                    <p class="help is-danger">Messages must be between 1 and 2048 characters! :D</p> 
+                {% else %}
+                    {{form.message(class="textarea", placeholder="Enter your message...")}}
+                {% endif %}
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input type="submit" value="Submit" class="button is-dark">
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

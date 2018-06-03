@@ -1,0 +1,36 @@
+{% extends "title.html" %}
+
+{% block title %}The Message Corner{% endblock %}
+{% block subtitle%}Why did I ever consider this to be a good idea?{% endblock %}
+
+{% block head %}
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/remove.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    {% block input %}{% endblock %}
+    <h1>Display</h1>
+    <div style="word-wrap:break-word">
+
+        {% for post in posts %}
+            <div class="box">
+                <strong>{{ post[1] }}</strong>
+                <em class="has-weight-light">on {{ post[3][:10] }}</em>
+                <a class="has-weight-light" href="/message-{{ post[0] }}">(permalink)</a>
+
+                {% if admin %}
+                <button class="delete" style="float: right" onclick="remove({{ post[0] }})"></button>
+                {% endif %}
+
+                <br>
+                <p>{{ post[2] }}</p>
+            </div>
+        {% endfor %}
+
+        {% if not posts %}
+        <h4>There's nothing here...</h4>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block footercontent %}<h4>This page was created in Python using Flask and SQLite.</h4>{% endblock %}

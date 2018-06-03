@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block header %}
+  <section class="hero is-dark is-bold is-medium" style="text-align: center">
+    {% block navbar %}{% endblock %}
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">{% block title %}{% endblock %}</h1>
+        <h2 class="subtitle">
+          <em>{% block subtitle %}{% endblock %}</em>
+        </h2>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block footer %}
+  <section class="hero is-dark is-small" id="contact">
+    <div class="hero-body" style="text-align: center">
+      <div class="container">
+        {% block footercontent %}{% endblock %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

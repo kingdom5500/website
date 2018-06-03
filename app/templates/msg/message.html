@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/message.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="box" style="word-wrap:break-word">
+    <strong>{{ msg[1] }}</strong> <em class="has-weight-light">on {{ msg[3][:10] }}</em>
+    <br>
+    <p>{{ msg[2] }}</p>
+</div>
+{% endblock %}
