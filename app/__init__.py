@@ -1,6 +1,8 @@
 import sqlite3
 
 from flask import Flask, g
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 from app.constants import DATABASE, DATABASE_SCHEMA
 
@@ -31,6 +33,11 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
+
+limiter = Limiter(
+    app,
+    key_func=get_remote_address
+)
 
 # These imports are here to avoid circular import errors
 from app.views.main import main_bp

@@ -3,9 +3,9 @@ from datetime import datetime
 
 from flask import Blueprint, render_template, request, g, redirect, url_for
 
+from app import limiter
 from app.constants import DATABASE
 from app.forms import PostForm
-from app.limiter import limiter
 
 msg_bp = Blueprint("msg", __name__, subdomain="msg")
 
