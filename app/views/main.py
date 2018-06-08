@@ -50,9 +50,7 @@ def get_access_token():
 
 
 def get_user_info(token):
-    """
-    Use a Discord API OAuth2 access token to retrieve information about my user.
-    """
+    """Use a Discord API OAuth2 access token to retrieve information about my user."""
     url = "{}/users/@me".format(DISCORD_API)
 
     # The Discord API requires a very specific format for the Authorization header.
