@@ -6,7 +6,7 @@ class Config:
     DEBUG = False
     TESTING = False
     SECRET_KEY = os.environ["SECRET_KEY"]
-    SERVER_NAME = "codingbykingsley.co.uk"
+    SERVER_NAME = os.environ["SERVER_NAME"]
 
 
 # Constants for the SQLite database.
