@@ -20,6 +20,10 @@ def get_db():
     return db
 
 
+# Create a new list of messages. Will be updated automatically.
+messages = []
+
+
 @msg_bp.route("/", methods=["GET", "POST"])
 @limiter.limit("3 per minute", methods=["POST"])
 def index():
@@ -40,12 +44,19 @@ def index():
         # Insert the generated data into the table.
         cur.execute("INSERT INTO messages(name, message, created) VALUES (?, ?, ?)", data)
         db.commit()
-        
+
+        # Add the row-id to the data so we can cache it properly.
+        data["id"] = cur.lastrowid
+
+        # Finally, add the data to our cache so we don't kill the database on every request
+        messages.append(data)
+
         return redirect(url_for("msg.index"))
 
-    # TODO: Use a better way of getting the messages because this is relatively slow.
-    cur.execute("SELECT * FROM messages")
-    messages = cur.fetchall()
+    # Load the messages if they haven't been cached yet.
+    if not messages:
+        cur.execute("SELECT * FROM messages")
+        messages.extend(cur.fetchall())
 
     return render_template('msg/index.html', form=form, posts=reversed(messages), admin=False)
 
@@ -65,8 +76,11 @@ def admin():
             cur.execute("DELETE FROM messages WHERE id = ?", (target,))
             db.commit()
 
-    cur.execute("SELECT * FROM messages")
-    messages = cur.fetchall()
+    # Load the messages if they haven't been cached yet.
+    if not messages:
+        cur.execute("SELECT * FROM messages")
+        messages.extend(cur.fetchall())
+
     return render_template('msg/title.html', posts=reversed(messages), admin=True)
 
 
